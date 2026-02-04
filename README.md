@@ -24,28 +24,51 @@ This application solves common meal planning challenges by providing:
 
 ```
 meal-mate/
-├── client/                 # React frontend application
+├── client/                          # React Frontend Application
+│   ├── public/                      # Static assets
 │   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── pages/          # Route components
+│   │   ├── components/              # Reusable UI components
+│   │   │   ├── ui/                  # Basic UI components (buttons, inputs)
+│   │   │   ├── layout/              # Layout components (header, sidebar)
+│   │   │   └── forms/               # Form components
+│   │   ├── pages/                   # Route components
 │   │   │   ├── Dashboard.tsx
 │   │   │   ├── Recipes.tsx
 │   │   │   ├── GroceryList.tsx
 │   │   │   └── Expenses.tsx
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── store/          # State management
-│   │   ├── utils/          # Utility functions
-│   │   └── types/          # TypeScript type definitions
-│   └── package.json
-├── server/                 # Node.js backend API
+│   │   ├── hooks/                   # Custom React hooks
+│   │   ├── store/                   # State management (Zustand)
+│   │   │   └── slices/              # Store slices
+│   │   ├── services/                # API calls and external services
+│   │   ├── utils/                   # Utility functions
+│   │   ├── types/                   # TypeScript type definitions
+│   │   └── assets/                  # Images, icons, fonts
+│   │       ├── images/
+│   │       └── icons/
+│   ├── package.json
+│   ├── vite.config.ts
+│   └── tailwind.config.js
+│
+├── server/                          # Node.js Backend API
 │   ├── src/
-│   │   ├── routes/         # API route handlers
-│   │   ├── controllers/    # Business logic
-│   │   ├── middleware/     # Express middleware
-│   │   └── shared/         # Shared types and utilities
-│   ├── prisma/             # Database schema and migrations
-│   └── package.json
-└── docs/                   # Project documentation
+│   │   ├── routes/                  # API route handlers
+│   │   ├── controllers/             # Business logic controllers
+│   │   ├── middleware/              # Express middleware
+│   │   ├── services/                # Business services
+│   │   ├── utils/                   # Utility functions
+│   │   ├── config/                  # Configuration files
+│   │   ├── shared/                  # Shared utilities
+│   │   │   ├── types/               # Shared TypeScript types
+│   │   │   └── constants/           # Application constants
+│   │   ├── tests/                   # Test files
+│   │   └── index.ts                 # Server entry point
+│   ├── prisma/                      # Database schema and migrations
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── .env.example
+│
+├── README.md                        # Project documentation
+└── .gitignore                       # Git ignore rules
 ```
 
 ## Current Status 
