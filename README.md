@@ -135,10 +135,29 @@ This will start:
 - Write clean, readable code with meaningful variable names
 
 ### Git Workflow
-- Create feature branches from main
-- Use descriptive commit messages
-- Test functionality before pushing
-- Keep commits focused and atomic
+- `master` branch - Production-ready code (for deployment)
+- `develop` branch - Integration branch for new features
+- `feature/*` branches - Individual feature development
+
+**Development Process:**
+```bash
+# 1. Create feature branch from develop
+git checkout develop
+git checkout -b feature/your-feature-name
+
+# 2. Work on feature and commit
+git add .
+git commit -m "Add your feature"
+
+# 3. Merge back to develop
+git checkout develop
+git merge feature/your-feature-name
+git branch -d feature/your-feature-name
+
+# 4. When develop is stable, merge to master
+git checkout master
+git merge develop
+```
 
 ## Next Steps for Contributors
 
