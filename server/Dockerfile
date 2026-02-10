@@ -9,7 +9,7 @@ RUN npm ci
 
 # Copy source and build
 COPY . .
-# Uncomment when you add a Prisma schema: RUN npx prisma generate
+RUN npx prisma generate
 RUN npm run build
 
 # Production stage

@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  name      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  recipes   Recipe[]
+  mealPlans MealPlan[]
+  expenses  Expense[]
+}
+
+model Recipe {
+  id           String     @id @default(uuid())
+  name         String
+  category     String     // breakfast, lunch, dinner, snacks, drinks
+  ingredients  Json
+  instructions String
+  prepTime     Int?       // minutes
+  cookTime     Int?       // minutes
+  servings     Int?
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mealPlans    MealPlan[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model MealPlan {
+  id        String   @id @default(uuid())
+  date      DateTime
+  mealType  String   // breakfast, lunch, dinner
+  recipeId  String?
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: SetNull)
+  notes     String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, date])
+}
+
+model GroceryItem {
+  id        String   @id @default(uuid())
+  name      String
+  quantity  String
+  price     Float?
+  purchased Boolean  @default(false)
+  category  String?  // vegetables, fruits, dairy, meat, etc.
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Expense {
+  id          String   @id @default(uuid())
+  description String
+  amount      Float
+  category    String   // groceries, outside_food, etc.
+  date        DateTime
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, date])
+}
